@@ -3,10 +3,19 @@
 	"version": "1.0.0",
 	"description": "Aplicacion de notas con node y express",
 	"main": "index.js",
+	"type": "module",
 	"scripts": {
-		"test": "",
-		"start": "node index.js"
+		"dev": "node --watch src/server.js",
+		"start": "node src/server.js"
 	},
 	"author": "Franco_SJ",
-	"license": "ISC"
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^5.1.1",
+		"dotenv": "^16.4.7",
+		"express": "^4.21.2",
+		"jsonwebtoken": "^9.0.2",
+		"morgan": "^1.10.0",
+		"pg": "^8.13.1"
+	}
 }
