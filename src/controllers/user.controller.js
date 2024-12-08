@@ -1,4 +1,5 @@
 import { UserModel } from "../models/user.model.js";
+import { passwordService } from "../services/password.service.js";
 
 const createUser = async (req, res) => {
 	// funcion para crear un nuevo usuario, toma como argumento req y res
@@ -8,7 +9,8 @@ const createUser = async (req, res) => {
 		const user = await UserModel.findUserByEmail(email); // se busca al usuario antes de registralo para que no haya errores
 		if (user) return res.status(400).json({ ok: false, message: "El usuario ya existe" });
 
-		const newUser = await UserModel.createUser(username, email, password); // se llama al modelo para crear el usuario
+		const hashedPassword = await passwordService.hashPassword(password);
+		const newUser = await UserModel.createUser(username, email, hashedPassword); // se llama al modelo para crear el usuario
 		return res.status(201).json({
 			ok: true,
 			message: "Usuario creado con exito",
@@ -29,7 +31,8 @@ const loginUser = async (req, res) => {
 		const user = await UserModel.findUserByEmail(email); // se busca al usuario
 		if (!user) return res.status(404).json({ ok: false, message: "El usuario no se encuentra registrado" });
 
-		if (user.password !== password) return res.status(400).json({ ok: false, message: "La contraseña es incorrecta" });
+		const passwordMatch = await passwordService.comparePassword(password, user.password);
+		if (!passwordMatch) return res.status(400).json({ ok: false, message: "La contraseña es incorrecta" }); // se comparan las contraseñas
 
 		return res.status(200).json({
 			ok: true,
@@ -41,7 +44,7 @@ const loginUser = async (req, res) => {
 			},
 		});
 	} catch (error) {
-		res.status(500).json({ ok: false, message: "Error al loguear al usuario" });
+		res.status(500).json({ ok: false, message: "Error al loguear al usuario" }); // devuelve un error si hay problema logueando
 	}
 };
 
