@@ -12,6 +12,7 @@ app.use(morgan("dev")); //morgan sirve para registrar las peticiones y mostrarla
 // RUTAS
 app.use("/api/users", userRouter); // ruta de usuario
 
+// SERVIDOR
 const PORT = process.env.PORT; // obtiene el puerto de la variable de entorno PORT
 
 app.listen(PORT, () => {
