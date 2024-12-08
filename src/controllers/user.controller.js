@@ -1,4 +1,5 @@
 import { UserModel } from "../models/user.model.js";
+import { generateToken } from "../services/jwt.service.js";
 import { passwordService } from "../services/password.service.js";
 
 const createUser = async (req, res) => {
@@ -11,6 +12,7 @@ const createUser = async (req, res) => {
 
 		const hashedPassword = await passwordService.hashPassword(password);
 		const newUser = await UserModel.createUser(username, email, hashedPassword); // se llama al modelo para crear el usuario
+		const token = generateToken(user.user_id);
 		return res.status(201).json({
 			ok: true,
 			message: "Usuario creado con exito",
@@ -19,13 +21,15 @@ const createUser = async (req, res) => {
 				username: newUser.username,
 				email: newUser.email,
 			},
-		}); // se devuelve el usuario creado sin la contrasena
+			token,
+		}); // se devuelve el usuario creado sin la contraseña y con el token
 	} catch (error) {
 		res.status(500).json({ ok: false, message: "Error al crear el usuario" }); // se devuelve un error si hay un problema creando el usuario
 	}
 };
 
 const loginUser = async (req, res) => {
+	// funcion para loguear al usuario
 	try {
 		const { email, password } = req?.body; // se obtienen los datos del body
 		const user = await UserModel.findUserByEmail(email); // se busca al usuario
@@ -33,7 +37,7 @@ const loginUser = async (req, res) => {
 
 		const passwordMatch = await passwordService.comparePassword(password, user.password);
 		if (!passwordMatch) return res.status(400).json({ ok: false, message: "La contraseña es incorrecta" }); // se comparan las contraseñas
-
+		const token = generateToken(user.user_id);
 		return res.status(200).json({
 			ok: true,
 			message: "Usuario logueado con exito",
@@ -42,6 +46,7 @@ const loginUser = async (req, res) => {
 				username: user.username,
 				email: user.email,
 			},
+			token,
 		});
 	} catch (error) {
 		res.status(500).json({ ok: false, message: "Error al loguear al usuario" }); // devuelve un error si hay problema logueando
