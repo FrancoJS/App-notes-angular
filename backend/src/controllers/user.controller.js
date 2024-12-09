@@ -1,10 +1,14 @@
 import { UserModel } from "../models/user.model.js";
+import { userSchema } from "../models/user.schema.js";
 import { generateToken } from "../services/jwt.service.js";
 import { passwordService } from "../services/password.service.js";
 
 const createUser = async (req, res) => {
 	// funcion para crear un nuevo usuario, toma como argumento req y res
 	try {
+		const { error } = userSchema.registerSchema.validate(req.body); // se validan los datos del body
+		if (error) return res.status(400).json({ ok: false, message: error.message });
+
 		const { username, email, password } = req.body; // se obtienen los datos del body
 
 		const user = await UserModel.findUserByEmail(email); // se busca al usuario antes de registralo para que no haya errores
@@ -23,7 +27,7 @@ const createUser = async (req, res) => {
 			},
 			token,
 		}); // se devuelve el usuario creado sin la contraseña y con el token
-	} catch (error) {
+	} catch {
 		res.status(500).json({ ok: false, message: "Error al crear el usuario" }); // se devuelve un error si hay un problema creando el usuario
 	}
 };
@@ -31,6 +35,9 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
 	// funcion para loguear al usuario
 	try {
+		const { error } = userSchema.loginSchema.validate(req.body); // se validan los datos del body
+		if (error) return res.status(400).json({ ok: false, message: error.message });
+
 		const { email, password } = req?.body; // se obtienen los datos del body
 		const user = await UserModel.findUserByEmail(email); // se busca al usuario
 		if (!user) return res.status(404).json({ ok: false, message: "El usuario no se encuentra registrado" });
@@ -48,7 +55,7 @@ const loginUser = async (req, res) => {
 			},
 			token,
 		});
-	} catch (error) {
+	} catch {
 		res.status(500).json({ ok: false, message: "Error al loguear al usuario" }); // devuelve un error si hay problema logueando
 	}
 };

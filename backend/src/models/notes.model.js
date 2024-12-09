@@ -30,8 +30,19 @@ const deleteNote = async (user_id, note_id) => {
 	return rows[0];
 };
 
+const updateNote = async (user_id, note_id, title, content) => {
+	const query = {
+		text: `UPDATE NOTES SET title = $1, content = $2 WHERE user_id = $3 AND note_id = $4 RETURNING *`,
+		values: [title, content, user_id, note_id],
+	};
+
+	const { rows } = await db.query(query);
+	return rows[0];
+};
+
 export const NotesModel = {
 	createNote,
 	getAllNotes,
 	deleteNote,
+	updateNote,
 };
