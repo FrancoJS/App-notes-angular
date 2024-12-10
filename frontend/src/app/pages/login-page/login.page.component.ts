@@ -7,14 +7,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import {
   ReactiveFormsModule,
-  FormGroup,
-  FormControl,
+  FormGroup, // clase para crear un formulario
+  FormControl, // clase para crear un control
   Validators,
   FormBuilder,
 } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-login-page',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -25,24 +25,27 @@ import {
     MatIcon,
     ReactiveFormsModule,
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  templateUrl: './login.page.component.html',
+  styleUrl: './login.page.component.scss',
 })
-export class LoginComponent {
-  // form = new FormGroup({ // forma de crear un formulario antigua
-  //   username: new FormControl(''),
-  //   password: new FormControl(''),
+export class LoginPageComponent {
+  // form = new FormGroup({
+  //   // forma de crear un formulario antigua
+  //   username: new FormControl('', { validators: [Validators.required] }),
+  //   password: new FormControl('', { validators: [Validators.required] }),
   // });
 
   private readonly _formBuilder = inject(FormBuilder);
 
-  form = this._formBuilder.group({
-    username: '',
-    password: '',
+  form = this._formBuilder.nonNullable.group({
+    // nonNullable es un atributo que hace que los controles sean obligatorios
+    // forma de crear un formulario moderna
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
   });
 
   clickLogin(): void {
-    const username = this.form.controls.username.value;
+    const username = this.form.controls.email.value;
     console.log(username);
   }
 }
