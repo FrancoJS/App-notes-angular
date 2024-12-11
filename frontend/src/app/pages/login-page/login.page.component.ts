@@ -12,6 +12,7 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
+import { passwordCustomValidator } from '../../shared/validators/password-custom-validators';
 
 @Component({
   selector: 'app-login-page',
@@ -41,11 +42,18 @@ export class LoginPageComponent {
     // nonNullable es un atributo que hace que los controles sean obligatorios
     // forma de crear un formulario moderna
     email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
+    password: ['', [Validators.required, passwordCustomValidator]],
   });
 
   clickLogin(): void {
-    const username = this.form.controls.email.value;
-    console.log(username);
+    console.log(this.passwordField.errors);
+  }
+
+  // getters para obtener email y password del formulario
+  get emailField(): FormControl<string> {
+    return this.form.controls.email;
+  }
+  get passwordField(): FormControl<string> {
+    return this.form.controls.password;
   }
 }

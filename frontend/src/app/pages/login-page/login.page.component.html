@@ -6,34 +6,29 @@
 
     <mat-card-content class="card-content">
       <form action="" class="card-content-form" [formGroup]="form">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="card-content-form-field">
           <mat-label>Email</mat-label>
-          <input
-            type="email"
-            matInput
-            placeholder="Ingrese su email"
-            formControlName="email"
-          />
+          <input type="email" matInput placeholder="Ingrese su email" formControlName="email" />
           <mat-icon matSuffix>account_circle</mat-icon>
+          @if (passwordField.hasError("required")) {
+          <mat-error>El email es obligatorio</mat-error>
+          } @if (passwordField.hasError("email")) {
+          <mat-error>El email no es valido</mat-error>
+          }
         </mat-form-field>
         <!-- Contraseña -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="card-content-form-field">
           <mat-label>Contraseña</mat-label>
-          <input
-            type="password"
-            matInput
-            placeholder="Ingrese su contraseña"
-            formControlName="password"
-          />
+          <input type="password" matInput placeholder="Ingrese su contraseña" formControlName="password" />
           <mat-icon matSuffix>lock</mat-icon>
+          @if (passwordField.hasError("passwordValidator")) {
+          <mat-error>La contraseña debe tener al menos 8 caracteres, un número, un símbolo y una mayúscula.</mat-error>
+          } @if (passwordField.hasError("required")) {
+
+          <mat-error>La contraseña es obligatorio</mat-error>
+          }
         </mat-form-field>
-        <button
-          mat-flat-button
-          class="card-content-login"
-          (click)="clickLogin()"
-        >
-          Iniciar sesión
-        </button>
+        <button mat-flat-button class="card-content-login" (click)="clickLogin()">Iniciar sesión</button>
       </form>
     </mat-card-content>
   </mat-card>
