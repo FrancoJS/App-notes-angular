@@ -5,6 +5,11 @@
   align-items: center;
   justify-content: center;
 
+  .card-title {
+    text-align: center;
+    padding-top: 2em;
+  }
+
   .card {
     width: 500px;
 
@@ -13,22 +18,24 @@
     }
 
     .card-content {
-      margin-top: 1.5em;
+      display: flex;
+      flex-direction: column;
+      padding-top: 1em;
+    }
+
+    .form {
+      padding: 1em;
       display: flex;
       flex-direction: column;
 
-      &-form {
-        display: flex;
-        flex-direction: column;
-
-        &-field {
-          margin-bottom: 1em;
-        }
+      &-field {
+        margin-bottom: 1em;
       }
 
-      // &-login {
-      //   font-size: 1rem;
-      // }
+      &-button {
+        font-size: 1rem;
+        border-radius: 2px;
+      }
     }
   }
 }
