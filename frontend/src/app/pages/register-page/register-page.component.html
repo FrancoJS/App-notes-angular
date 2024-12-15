@@ -1,1 +1,54 @@
-<p>register-page works!</p>
+<div class="container">
+  <mat-card class="card">
+    <mat-card-header class="card-title">
+      <mat-card-title>Registro</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="card-content">
+      <form class="form" [formGroup]="form">
+        <!-- Username -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Nombre de usuario</mat-label>
+          <input type="email" matInput placeholder="Ingrese su nombre de usuario" formControlName="username" />
+          <mat-icon matSuffix>account_circle</mat-icon>
+          @if(usernameField.hasError('required')){
+          <mat-error>El nombre de usuario es obligatorio</mat-error>
+          } @if(usernameField.hasError('minlength') || usernameField.hasError('maxlength')){
+          <mat-error>El nombre de usuario debe tener entre 5 y 50 caracteres</mat-error>
+          }
+        </mat-form-field>
+        <!-- Email -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput placeholder="Ingrese su email" formControlName="email" />
+          <mat-icon matSuffix>mail</mat-icon>
+          @if (emailField.hasError("required")) {
+          <mat-error>El email es obligatorio</mat-error>
+          } @if (emailField.hasError("email")) {
+          <mat-error>El email no es valido</mat-error>
+          } @if((emailField.hasError('minlength') || emailField.hasError('maxlength')) && !emailField.hasError('email')){
+          <mat-error>El email debe tener entre 10 y 50 caracteres</mat-error>
+          }
+        </mat-form-field>
+        <!-- Password  -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Contraseña</mat-label>
+          <input type="password" matInput placeholder="Ingrese su contraseña" formControlName="password" />
+          <mat-icon matSuffix>lock</mat-icon>
+          @if (passwordField.hasError("passwordValidator")) {
+          <mat-error>La contraseña debe tener al menos 8 caracteres, un número, un símbolo y una mayúscula.</mat-error>
+          } @if (passwordField.hasError("required")) {
+          <mat-error>La contraseña es obligatoria</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <!-- Confirmar Password -->
+          <mat-label>Confirmar contraseña</mat-label>
+          <input type="password" matInput formControlName="confirmPassword" />
+          <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+        <button mat-flat-button class="form-button" (click)="clickRegister()">Registrarse</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
