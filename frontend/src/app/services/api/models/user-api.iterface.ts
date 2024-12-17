@@ -5,7 +5,7 @@ export interface IApiLoginRequest {
 }
 
 //Es lo que recibimos del backend al iniciar sesion
-export interface IApiLoginResponse {
+export interface IApiUserResponse {
   ok: boolean;
   message: string;
   user: IApiUser;

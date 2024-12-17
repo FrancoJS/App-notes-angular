@@ -12,14 +12,25 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
+RouterLink;
 import { passwordCustomValidator } from '../../shared/validators/password-custom-validators';
 import { AuthApiService } from '../../services/api/auth-api.service';
 import { IApiLoginRequest } from '../../services/api/models/user-api.iterface';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatCardModule, MatIcon, ReactiveFormsModule],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIcon,
+    ReactiveFormsModule,
+    RouterLink,
+  ],
   templateUrl: './login.page.component.html',
   styleUrl: './login.page.component.scss',
 })

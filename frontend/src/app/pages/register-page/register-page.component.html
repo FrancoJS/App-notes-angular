@@ -44,11 +44,19 @@
         <mat-form-field appearance="outline" class="form-field">
           <!-- Confirmar Password -->
           <mat-label>Confirmar contraseña</mat-label>
-          <input type="password" matInput formControlName="confirmPassword" />
+          <input type="password" matInput formControlName="confirmPassword" [errorStateMatcher]="passwordStateMatcher" />
           <mat-icon matSuffix>lock</mat-icon>
+          @if (confirmPasswordField.hasError("required")) {
+          <mat-error>Confirme contraseña</mat-error>
+          } @if(form.hasError("crossPasswordValidator")) {
+          <mat-error>Las contraseñas no coinciden</mat-error>
+          }
         </mat-form-field>
         <button mat-flat-button class="form-button" (click)="clickRegister()">Registrarse</button>
       </form>
+      <a [routerLink]="['auth/login']" routerLinkActive="router-link-active"
+        >¿Ya tienes una cuenta? <strong>Inicia sesion</strong></a
+      >
     </mat-card-content>
   </mat-card>
 </div>

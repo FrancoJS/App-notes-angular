@@ -6,30 +6,63 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { ReactiveFormsModule, Validators, NonNullableFormBuilder, FormControl } from '@angular/forms';
-import { passwordCustomValidator } from '../../shared/validators/password-custom-validators';
+import {
+  crossPasswordValidator,
+  passwordCustomValidator,
+  PasswordStateMatcher,
+} from '../../shared/validators/password-custom-validators';
+import { AuthApiService } from '../../services/api/auth-api.service';
+import { IApiRegisterRequest } from '../../services/api/models/user-api.iterface';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatCardModule, MatIcon, ReactiveFormsModule],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIcon,
+    ReactiveFormsModule,
+    RouterLink,
+  ],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.scss',
 })
 export class RegisterPageComponent {
   private readonly _formBuilder = inject(NonNullableFormBuilder);
+  private _authApiService = inject(AuthApiService);
 
-  form = this._formBuilder.group({
-    username: [
-      '',
-      [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9_]{5,50}$/)],
-    ],
-    email: ['', [Validators.required, Validators.email, Validators.minLength(10), Validators.maxLength(50)]],
-    password: ['', [Validators.required, passwordCustomValidator]],
-    confirmPassword: ['', [Validators.required, passwordCustomValidator]],
-  });
+  passwordStateMatcher = new PasswordStateMatcher();
+  form = this._formBuilder.group(
+    {
+      username: [
+        '',
+        [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9_]{5,50}$/)],
+      ],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(10), Validators.maxLength(50)]],
+      password: ['', [Validators.required, passwordCustomValidator]],
+      confirmPassword: ['', [Validators.required]],
+    },
+    { validators: crossPasswordValidator },
+  );
 
   clickRegister(): void {
-    console.log('Boton funcionando');
+    if (this.form.valid) {
+      const { confirmPassword, ...data } = this.form.value;
+      this._authApiService.registerUser(data as IApiRegisterRequest).subscribe({
+        next: (data) => {
+          console.log(data);
+          localStorage.setItem('token', data.token);
+        },
+        error: (err) => {
+          const { error } = err;
+          console.log(error);
+        },
+      });
+    }
   }
 
   get usernameField(): FormControl<string> {
@@ -41,5 +74,9 @@ export class RegisterPageComponent {
   }
   get passwordField(): FormControl<string> {
     return this.form.controls.password;
+  }
+
+  get confirmPasswordField(): FormControl<string> {
+    return this.form.controls.confirmPassword;
   }
 }

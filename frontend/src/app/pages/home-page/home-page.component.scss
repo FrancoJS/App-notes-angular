@@ -1,0 +1,23 @@
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .card {
+    width: 500px;
+
+    &-title {
+      justify-content: center;
+    }
+
+    &-content {
+      padding: 1em;
+    }
+
+    &-actions {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

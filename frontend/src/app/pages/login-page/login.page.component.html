@@ -30,6 +30,9 @@
         </mat-form-field>
         <button mat-flat-button class="form-button" (click)="clickLogin()">Iniciar sesión</button>
       </form>
+      <a [routerLink]="['/auth/register']" routerLinkActive="router-link-active"
+        >¿No tienes una cuenta? <strong>Registrate</strong></a
+      >
     </mat-card-content>
   </mat-card>
 </div>
