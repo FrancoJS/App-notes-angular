@@ -11,9 +11,10 @@ import {
   passwordCustomValidator,
   PasswordStateMatcher,
 } from '../../shared/validators/password-custom-validators';
-import { AuthApiService } from '../../services/api/auth-api.service';
-import { IApiRegisterRequest } from '../../services/api/models/user-api.iterface';
+
+import { IApiRegisterRequest } from '../../services/models/user-api.iterface';
 import { RouterLink } from '@angular/router';
+import { AuthApiService } from '../../services/api/auth-api.service';
 
 @Component({
   selector: 'app-register-page',

@@ -14,9 +14,9 @@ import {
 } from '@angular/forms';
 RouterLink;
 import { passwordCustomValidator } from '../../shared/validators/password-custom-validators';
+import { IApiLoginRequest } from '../../services/models/user-api.iterface';
+import { Router, RouterLink } from '@angular/router';
 import { AuthApiService } from '../../services/api/auth-api.service';
-import { IApiLoginRequest } from '../../services/api/models/user-api.iterface';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -40,6 +40,7 @@ export class LoginPageComponent {
   //   username: new FormControl('', { validators: [Validators.required] }),
   //   password: new FormControl('', { validators: [Validators.required] }),
   // });
+  private readonly _router = inject(Router);
   private readonly _formBuilder = inject(FormBuilder);
   private _authApiService = inject(AuthApiService);
 
@@ -56,6 +57,7 @@ export class LoginPageComponent {
         next: (response) => {
           console.log(response);
           localStorage.setItem('token', response.token);
+          this._router.navigateByUrl('api/notes');
         },
         error: (err) => {
           const { error } = err;
