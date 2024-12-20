@@ -1,7 +1,7 @@
 <div class="container">
   <header class="header">
     <h1>Mis Notas</h1>
-    <button mat-stroked-button>Agregar nota <mat-icon>add</mat-icon></button>
+    <button (click)="openDialog()" mat-stroked-button>Agregar nota <mat-icon>add</mat-icon></button>
   </header>
   <div class="notes-list">
     @if(notes.length > 0) { @for(note of notes; track note.note_id){

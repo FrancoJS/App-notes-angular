@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Install Angular</h2>
+<mat-dialog-content class="dialog">
+  <form class="form" [formGroup]="form">
+    <mat-form-field class="form-field">
+      <mat-label>Titulo</mat-label>
+      <input type="text" matInput formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Contenido</mat-label>
+      <textarea type="text" matInput class="textarea" formControlName="content"></textarea>
+    </mat-form-field>
+  </form>
+  <mat-dialog-actions align="end">
+    <button mat-flat-button mat-dialog-close>Cancelar</button>
+    <button mat-flat-button (click)="saveNote()">Guardar</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

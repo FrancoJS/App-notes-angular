@@ -1,0 +1,16 @@
+.dialog {
+  //   width: 400px;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+
+    &-field {
+      width: 400px;
+
+      .textarea {
+        min-height: 200px;
+      }
+    }
+  }
+}

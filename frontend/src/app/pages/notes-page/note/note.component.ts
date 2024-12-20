@@ -15,10 +15,9 @@ export class NoteComponent {
   @Input() note!: IApiNote;
 
   maxContentLength: number = 100;
-  updateNote() {
+  editNote() {
     console.log('Actualizar nota');
   }
-
   deleteNote() {
     console.log('Eliminar nota');
   }
