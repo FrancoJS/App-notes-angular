@@ -1,24 +1,11 @@
-<ng-container [formGroup]="form">
-  <ng-container formArrayName="notes">
-    <mat-card class="example-card" appearance="outlined">
-      <mat-card-header>
-        <mat-card-title>Notas</mat-card-title>
-      </mat-card-header>
-
-      <mat-card-content *ngFor="let note of notes.controls; let i = index" [formGroupName]="i">
-        <form>
-          <p>{{ note.value.createdAt }}</p>
-          <mat-form-field class="example-full-width">
-            <mat-label>Titulo</mat-label>
-            <input type="text" matInput formControlName="title" />
-          </mat-form-field>
-          <mat-form-field class="example-full-width">
-            <mat-label>Titulo</mat-label>
-            <input type="text" matInput formControlName="content" />
-          </mat-form-field>
-          <button (click)="clickInfo()">Ver informacion</button>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </ng-container>
-</ng-container>
+<div class="container">
+  <header class="header">
+    <h1>Mis Notas</h1>
+    <button mat-stroked-button>Agregar nota <mat-icon>add</mat-icon></button>
+  </header>
+  <div class="notes-list">
+    @if(notes.length > 0) { @for(note of notes; track note.note_id){
+    <app-note [note]="note"></app-note>
+    } }
+  </div>
+</div>

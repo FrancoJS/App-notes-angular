@@ -1,10 +1,10 @@
 export interface IApiNotesResponse {
   ok: boolean;
   message: string;
-  notes: IApiNotes[];
+  notes: IApiNote[];
 }
 
-export interface IApiNotes {
+export interface IApiNote {
   note_id: number;
   title: string;
   content: string;
