@@ -1,18 +1,19 @@
 <div class="container">
-  <mat-card class="card" appearance="outlined">
-    <mat-card-header class="card-title">
-      <mat-card-title>Aplicacion de Notas </mat-card-title>
+  <mat-card class="card">
+    <mat-card-header class="card-header">
+      <mat-card-title class="card-header-title">Aplicacion de Notas </mat-card-title>
     </mat-card-header>
 
     <mat-card-content class="card-content">
       <p>
-        Aplicacion de notas creada con Angular y Node.js con Express, creada con la finalidad de practicar las tecnologias y
-        aplicar buenas practicas. Es necesario iniciar sesion para poder usar la aplicacion.
+        Aplicacion de notas creada con la finalidad de practicar algunos conceptos de Angular. El backend esta hecho con Node y
+        Express, es un CRUD basico para las notas y se ocupo Angular material como framework para la interfaz. Es necesario
+        iniciar sesion para poder ocupar la aplicacion.
       </p>
     </mat-card-content>
     <mat-card-actions class="card-actions">
-      <button [routerLink]="['/auth/login']" routerLinkActive="router-link-active" mat-button>INICIAR SESION</button>
-      <button [routerLink]="['/auth/register']" mat-button>REGISTRARSE</button>
+      <button [routerLink]="['/auth/login']" mat-flat-button>INICIAR SESION</button>
+      <button [routerLink]="['/auth/register']" mat-flat-button>REGISTRARSE</button>
     </mat-card-actions>
   </mat-card>
 </div>

@@ -10,7 +10,7 @@
       <textarea type="text" matInput class="textarea" formControlName="content"></textarea>
     </mat-form-field>
   </form>
-  <mat-dialog-actions>
+  <mat-dialog-actions align="end">
     <button mat-flat-button [mat-dialog-close]>Cancelar</button>
     @if(dialogMode == 'create') {
     <button mat-flat-button (click)="saveNote()">Guardar</button>

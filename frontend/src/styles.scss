@@ -5,4 +5,37 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-color: rgb(15 23 42);
+
+  .card {
+    background-color: rgb(30 41 59);
+    color: #ddd;
+
+    .label {
+      color: #ddd;
+    }
+
+    input {
+      color: #ddd;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    .icon {
+      // color: #005cbb;
+      color: #ddd;
+    }
+
+    a {
+      text-decoration: none;
+      text-align: center;
+      color: #ddd;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
 }

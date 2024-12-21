@@ -30,6 +30,23 @@
 
       &-field {
         margin-bottom: 1em;
+
+        .label {
+          color: #ddd;
+          line-height: 4px;
+        }
+
+        input {
+          color: #ddd;
+
+          &:hover {
+            color: #fff;
+          }
+        }
+
+        .icon {
+          color: #ddd;
+        }
       }
 
       &-button {
@@ -40,7 +57,7 @@
     a {
       text-decoration: none;
       text-align: center;
-      color: #3f51b5;
+      color: #ddd;
 
       &:hover {
         opacity: 0.8;
