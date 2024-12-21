@@ -5,7 +5,7 @@
   </header>
   <div class="notes-list">
     @if(notes.length > 0) { @for(note of notes; track note.note_id){
-    <app-note [note]="note"></app-note>
+    <app-note [note]="note" (delete)="handleNoteDeleted($event)"></app-note>
     } }
   </div>
 </div>

@@ -15,9 +15,19 @@ export class NotesApiService {
       headers: { Authorization: `Bearer ${this._token}` },
     });
   }
-
-  createNote(note: IApiNoteRequest) {
+  createNote(note: IApiNoteRequest): Observable<IApiNoteResponse> {
     return this._httpClient.post<IApiNoteResponse>(this._notesUrl + '/create', note, {
+      headers: { Authorization: `Bearer ${this._token}` },
+    });
+  }
+  updateNote(note: IApiNoteRequest, note_id: number): Observable<IApiNoteResponse> {
+    return this._httpClient.put<IApiNoteResponse>(this._notesUrl + `/update/${note_id}`, note, {
+      headers: { Authorization: `Bearer ${this._token}` },
+    });
+  }
+
+  deleteNote(note_id: number): Observable<IApiNoteResponse> {
+    return this._httpClient.delete<IApiNoteResponse>(this._notesUrl + `/delete/${note_id}`, {
       headers: { Authorization: `Bearer ${this._token}` },
     });
   }

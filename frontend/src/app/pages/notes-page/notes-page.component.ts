@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { NotesApiService } from '../../services/api/notes-api.service';
 import { NoteComponent } from './note/note.component';
 import { IApiNote } from '../../services/models/notes-api.interface';
@@ -28,11 +28,23 @@ export class NotesPageComponent implements OnInit {
       },
     });
   }
-
   openDialog() {
-    const diaglogRef = this._dialog.open(NoteDialogComponent);
+    const diaglogRef = this._dialog.open(NoteDialogComponent, {
+      data: {
+        mode: 'create',
+        title: 'Crear nota',
+      },
+    });
+
     diaglogRef.afterClosed().subscribe((note: IApiNote) => {
+      if (!note) return;
       this.notes.unshift(note);
     });
+  }
+
+  handleNoteDeleted(noteId: number) {
+    if (!noteId) return;
+    const index = this.notes.findIndex((note) => note.note_id === noteId);
+    this.notes.splice(index, 1);
   }
 }
