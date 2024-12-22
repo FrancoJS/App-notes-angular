@@ -20,10 +20,11 @@ export class NoteComponent {
   @Input() note!: IApiNote;
   private _noteApiService = inject(NotesApiService);
   private _dialog = inject(MatDialog);
+  private _token = localStorage.getItem('token')!;
   @Output() delete = new EventEmitter<number>();
 
   maxContentLength: number = 150;
-  editNote() {
+  editNote(): void {
     const dialogRef = this._dialog.open(NoteDialogComponent, {
       data: {
         mode: 'edit',
@@ -37,8 +38,8 @@ export class NoteComponent {
       this.note = note;
     });
   }
-  deleteNote() {
-    this._noteApiService.deleteNote(this.note.note_id).subscribe({
+  deleteNote(): void {
+    this._noteApiService.deleteNote(this.note.note_id, this._token).subscribe({
       next: (data) => {
         const { note } = data;
         this.delete.emit(note.note_id);

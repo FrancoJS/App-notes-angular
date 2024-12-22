@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { IApiLoginRequest, IApiUserResponse, IApiRegisterRequest } from '../models/user-api.iterface';
-
 import { Observable } from 'rxjs';
 
 @Injectable({

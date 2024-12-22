@@ -55,7 +55,8 @@ export class RegisterPageComponent {
       const { confirmPassword, ...data } = this.form.value;
       this._authApiService.registerUser(data as IApiRegisterRequest).subscribe({
         next: (data) => {
-          console.log(data);
+          const { username } = data.user;
+          localStorage.setItem('username', username);
           localStorage.setItem('token', data.token);
         },
         error: (err) => {

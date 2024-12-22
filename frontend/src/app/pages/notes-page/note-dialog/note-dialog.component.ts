@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NotesApiService } from '../../../services/api/notes-api.service';
 import { IApiNoteRequest } from '../../../services/models/notes-api.interface';
+
 @Component({
   selector: 'app-note-dialog',
   standalone: true,
@@ -20,6 +21,7 @@ export class NoteDialogComponent {
   private _notesApiService = inject(NotesApiService);
   private _dialogRef = inject(MatDialogRef<NoteDialogComponent>);
   private _data = inject(MAT_DIALOG_DATA);
+  private _token = localStorage.getItem('token')!;
   dialogMode = this._data.mode;
   dialogTitle = this._data.title;
   note = this._data?.note;
@@ -31,7 +33,7 @@ export class NoteDialogComponent {
 
   saveNote() {
     if (!this.form.valid) return;
-    this._notesApiService.createNote(this.form.value as IApiNoteRequest).subscribe({
+    this._notesApiService.createNote(this.form.value as IApiNoteRequest, this._token).subscribe({
       next: (data) => {
         const { note } = data;
         this._dialogRef.close(note);
@@ -44,10 +46,9 @@ export class NoteDialogComponent {
 
   updateNote() {
     if (!this.form.valid) return;
-    this._notesApiService.updateNote(this.form.value as IApiNoteRequest, this.note?.note_id).subscribe({
+    this._notesApiService.updateNote(this.form.value as IApiNoteRequest, this.note?.note_id, this._token).subscribe({
       next: (data) => {
         const { note } = data;
-        console.log(data);
         this._dialogRef.close(note);
       },
       error: (err) => {

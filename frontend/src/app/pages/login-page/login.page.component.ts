@@ -55,6 +55,8 @@ export class LoginPageComponent {
     if (this.form.valid) {
       this._authApiService.loginUser(this.form.value as IApiLoginRequest).subscribe({
         next: (response) => {
+          const { username } = response.user;
+          localStorage.setItem('username', username);
           localStorage.setItem('token', response.token);
           this._router.navigateByUrl('api/notes');
         },
