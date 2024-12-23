@@ -1,18 +1,35 @@
-h2 {
-  text-align: center;
-  color: #ddd;
-}
-.dialog {
-  //   width: 400px;
+.card {
+  display: flex;
+  flex-direction: column;
 
-  .form {
-    display: flex;
-    flex-direction: column;
+  h2 {
+    text-align: center;
+    color: #ddd;
+  }
+  .dialog {
+    // border-radius: 2px;
 
-    &-field {
-      width: 400px;
+    .form {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 0;
+
+      &-field {
+        width: 400px;
+        color: #ddd;
+        margin-bottom: 10px;
+      }
+
+      input {
+        color: #ddd;
+      }
+
+      .label {
+        color: #ddd;
+      }
 
       .textarea {
+        color: #ddd;
         min-height: 150px;
         max-height: 150px;
       }

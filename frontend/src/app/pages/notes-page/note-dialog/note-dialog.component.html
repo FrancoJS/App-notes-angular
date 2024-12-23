@@ -1,20 +1,32 @@
-<h2 mat-dialog-title>{{ dialogTitle }}</h2>
-<mat-dialog-content class="dialog">
-  <form class="form" [formGroup]="form">
-    <mat-form-field class="form-field">
-      <mat-label>Titulo</mat-label>
-      <input type="text" matInput formControlName="title" />
-    </mat-form-field>
-    <mat-form-field class="form-field">
-      <mat-label>Contenido</mat-label>
-      <textarea type="text" matInput class="textarea" formControlName="content"></textarea>
-    </mat-form-field>
-  </form>
-  <mat-dialog-actions align="end">
-    <button mat-flat-button [mat-dialog-close]>Cancelar</button>
-    @if(dialogMode == 'create') {
-    <button mat-flat-button (click)="saveNote()">Guardar</button>
-    }@else {
-    <button mat-flat-button (click)="updateNote()">Actualizar</button>}
-  </mat-dialog-actions>
-</mat-dialog-content>
+<mat-card class="card">
+  <h2 mat-dialog-title>{{ dialogTitle }}</h2>
+  <mat-dialog-content class="dialog">
+    <form class="form" [formGroup]="form">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label class="label">Titulo</mat-label>
+        <input type="text" matInput formControlName="title" />
+        @if (titleField.hasError("required")) {
+        <mat-error>El titulo es obligatorio</mat-error>
+        } @if(titleField.hasError("maxlength")){
+        <mat-error>El titulo puede tener hasta 50 caracteres</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label class="label">Contenido</mat-label>
+        <textarea type="text" matInput class="textarea" formControlName="content"></textarea>
+        @if (contentField.hasError("required")) {
+        <mat-error>El contenido es obligatorio</mat-error>
+        } @if(contentField.hasError("maxlength")){
+        <mat-error>El contenido puede tener hasta 150 caracteres</mat-error>
+        }
+      </mat-form-field>
+    </form>
+    <mat-dialog-actions align="end">
+      <button mat-stroked-button [mat-dialog-close]>Cancelar</button>
+      @if(dialogMode == 'create') {
+      <button mat-stroked-button (click)="saveNote()">Guardar</button>
+      }@else {
+      <button mat-stroked-button (click)="updateNote()">Actualizar</button>}
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</mat-card>

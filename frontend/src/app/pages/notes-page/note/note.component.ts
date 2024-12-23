@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
 import { Output, EventEmitter } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
+import { SnackbarService } from '../../../services/snackbar.service';
 
 @Component({
   selector: 'app-note',
@@ -21,9 +22,9 @@ export class NoteComponent {
   private _noteApiService = inject(NotesApiService);
   private _dialog = inject(MatDialog);
   private _token = localStorage.getItem('token')!;
+  private _snackBarService = inject(SnackbarService);
   @Output() delete = new EventEmitter<number>();
 
-  maxContentLength: number = 150;
   editNote(): void {
     const dialogRef = this._dialog.open(NoteDialogComponent, {
       data: {
@@ -42,6 +43,7 @@ export class NoteComponent {
     this._noteApiService.deleteNote(this.note.note_id, this._token).subscribe({
       next: (data) => {
         const { note } = data;
+        this._snackBarService.showMessage('¡Nota eliminada con exito!', 'Cerrar', 3000);
         this.delete.emit(note.note_id);
       },
       error: (err) => {

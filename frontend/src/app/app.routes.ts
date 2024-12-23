@@ -3,6 +3,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { LoginPageComponent } from './pages/login-page/login.page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NotesPageComponent } from './pages/notes-page/notes-page.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -20,5 +21,6 @@ export const routes: Routes = [
   {
     path: 'api/notes',
     component: NotesPageComponent,
+    canActivate: [authGuard],
   },
 ];

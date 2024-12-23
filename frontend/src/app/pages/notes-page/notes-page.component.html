@@ -2,7 +2,7 @@
 <div class="container">
   <header class="header">
     <h1>Hola, {{ username }}.</h1>
-    <button (click)="openDialog()" mat-flat-button>Agregar nota <mat-icon class="icon" fontIcon="add"></mat-icon></button>
+    <button (click)="openDialog()" mat-stroked-button>Agregar nota <mat-icon class="icon" fontIcon="add"></mat-icon></button>
   </header>
   <div class="notes-list">
     @if(notes.length > 0) { @for(note of notes; track note.note_id){

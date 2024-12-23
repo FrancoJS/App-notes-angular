@@ -1,7 +1,9 @@
 <mat-card class="card">
   <div class="card-options">
     <mat-card-header class="card-header">
-      <mat-card-title class="card-title">{{ note.title }}</mat-card-title>
+      <mat-card-title class="card-title">
+        {{ note.title }}
+      </mat-card-title>
     </mat-card-header>
     <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon class="icon">more_vert</mat-icon></button>
     <mat-menu class="options-menu" #menu="matMenu">
@@ -10,10 +12,6 @@
     </mat-menu>
   </div>
   <mat-card-content class="card-content">
-    @if(note.content.length > maxContentLength ){
-    {{ note.content.slice(0, maxContentLength) + '...' }}
-    } @else {
     {{ note.content }}
-    }
   </mat-card-content>
 </mat-card>
