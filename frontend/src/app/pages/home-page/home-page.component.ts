@@ -11,3 +11,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {}
+
+// RouterLink es una directiva que permite vincular rutas dentro de la aplicacion, permitiendo que los elementos HTML, como los enlaces <a>, se conviertan en enlaces de navegacion en Angular, haciendo una navegacion interna
+
+// La seccion de import contiene elementos de angular material necesarios para que funciones la aplicacion

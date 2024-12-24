@@ -15,6 +15,7 @@ import {
 import { IApiRegisterRequest } from '../../services/models/user-api.iterface';
 import { Router, RouterLink } from '@angular/router';
 import { AuthApiService } from '../../services/api/auth-api.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-register-page',
@@ -36,8 +37,11 @@ export class RegisterPageComponent {
   private readonly _formBuilder = inject(NonNullableFormBuilder);
   private _authApiService = inject(AuthApiService);
   private _router = inject(Router);
+  private _snackBarService = inject(SnackbarService);
 
+  // Se instancia una clase ya definida que permite ver si el formulario tiene el error crossPasswordValidator
   passwordStateMatcher = new PasswordStateMatcher();
+
   form = this._formBuilder.group(
     {
       username: [
@@ -49,6 +53,7 @@ export class RegisterPageComponent {
       confirmPassword: ['', [Validators.required]],
     },
     { validators: crossPasswordValidator },
+    // crossPasswordValidator es un validador personalizado que verifica que las contraseñas sean iguales
   );
 
   clickRegister(): void {
@@ -62,8 +67,8 @@ export class RegisterPageComponent {
           this._router.navigateByUrl('api/notes');
         },
         error: (err) => {
-          const { error } = err;
-          console.log(error);
+          console.log(err);
+          this._snackBarService.showMessage('¡El usuario ya se encuentra registrado!', 'Cerrar', 3000);
         },
       });
     }

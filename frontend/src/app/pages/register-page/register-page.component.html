@@ -48,7 +48,7 @@
           <mat-icon class="icon" matSuffix>lock</mat-icon>
           @if (confirmPasswordField.hasError("required")) {
           <mat-error>Confirme contraseña</mat-error>
-          } @if(form.hasError("crossPasswordValidator")) {
+          } @if(passwordStateMatcher) {
           <mat-error>Las contraseñas no coinciden</mat-error>
           }
         </mat-form-field>
