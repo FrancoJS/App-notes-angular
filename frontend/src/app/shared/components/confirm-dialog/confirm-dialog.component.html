@@ -1,0 +1,15 @@
+<mat-card class="card">
+  <mat-dialog-content class="dialog">
+    <h2>{{ dialogMessage }}</h2>
+    <mat-card-actions class="dialog-actions">
+      <button mat-stroked-button aria-label="delete icon" [mat-dialog-close]="false">
+        Cancelar
+        <mat-icon>close</mat-icon>
+      </button>
+      <button mat-stroked-button aria-label="check icon" (click)="confirmDelete()">
+        Eliminar
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-dialog-content>
+</mat-card>

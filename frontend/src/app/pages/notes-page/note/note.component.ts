@@ -9,6 +9,7 @@ import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
 import { Output, EventEmitter } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { SnackbarService } from '../../../services/snackbar.service';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-note',
@@ -23,7 +24,7 @@ export class NoteComponent {
   private _dialog = inject(MatDialog);
   private _token = localStorage.getItem('token')!;
   private _snackBarService = inject(SnackbarService);
-  @Output() delete = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<{ note_id: number; totalNotes: number | undefined }>();
 
   editNote(): void {
     const dialogRef = this._dialog.open(NoteDialogComponent, {
@@ -40,15 +41,29 @@ export class NoteComponent {
     });
   }
   deleteNote(): void {
-    this._noteApiService.deleteNote(this.note.note_id, this._token).subscribe({
-      next: (data) => {
-        const { note } = data;
-        this._snackBarService.showMessage('¡Nota eliminada con exito!', 'Cerrar', 3000);
-        this.delete.emit(note.note_id);
+    const dialogRef = this._dialog.open(ConfirmDialogComponent, {
+      autoFocus: false,
+      data: {
+        title: 'Eliminar nota',
+        message: '¿Seguro que desea eliminar la nota?',
       },
-      error: (err) => {
-        console.log(err);
-      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirm) => {
+      if (!confirm) return;
+      this._noteApiService.deleteNote(this.note.note_id, this._token).subscribe({
+        next: (data) => {
+          const { note, totalNotes } = data;
+          this._snackBarService.showMessage('¡Nota eliminada con exito!', 'Cerrar', 3000);
+          this.delete.emit({
+            note_id: note.note_id,
+            totalNotes,
+          });
+        },
+        error: () => {
+          this._snackBarService.showMessage('¡No se pudo eliminar la nota!', 'Cerrar', 3000);
+        },
+      });
     });
   }
 }

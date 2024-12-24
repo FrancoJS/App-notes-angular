@@ -7,11 +7,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { NoteDialogComponent } from './note-dialog/note-dialog.component';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-notes-page',
   standalone: true,
-  imports: [NoteComponent, MatButtonModule, MatIconModule, NavbarComponent],
+  imports: [NoteComponent, MatButtonModule, MatIconModule, NavbarComponent, MatPaginatorModule],
   templateUrl: './notes-page.component.html',
   styleUrl: './notes-page.component.scss',
 })
@@ -19,16 +21,22 @@ export class NotesPageComponent implements OnInit {
   private _notesApiService = inject(NotesApiService);
   private _dialog = inject(MatDialog);
   private _token = localStorage.getItem('token');
+  private _snackBarService = inject(SnackbarService);
   username = localStorage.getItem('username');
   notes: IApiNote[] = [];
+  totalNotes!: number;
+  limit!: number;
+
+  pageEvent?: PageEvent;
   ngOnInit(): void {
     if (this._token) {
       this._notesApiService.getNotes(this._token).subscribe({
         next: (data) => {
-          this.notes = data.notes.slice().reverse();
+          this.totalNotes = data.totalNotes;
+          this.notes = data.notes;
         },
         error: (err) => {
-          console.log(err);
+          this._snackBarService.showMessage('¡No se encontraron notas!', 'Cerrar', 3000);
         },
       });
     }
@@ -42,16 +50,52 @@ export class NotesPageComponent implements OnInit {
         },
       });
 
-      diaglogRef.afterClosed().subscribe((note: IApiNote) => {
-        if (!note) return;
-        this.notes.unshift(note);
+      diaglogRef.afterClosed().subscribe((result: { note: IApiNote; totalNotes: number }) => {
+        if (!result) return;
+        if (!result.note) return;
+
+        if (this.notes.length >= this.limit) {
+          this.notes.pop();
+        }
+        this.notes.unshift(result.note);
+
+        if (result.totalNotes) this.totalNotes = result.totalNotes;
       });
     }
   }
 
-  handleNoteDeleted(noteId: number) {
-    if (!noteId) return;
-    const index = this.notes.findIndex((note) => note.note_id === noteId);
+  handleNoteDeleted(data: { note_id: number; totalNotes: number | undefined }) {
+    const { note_id, totalNotes } = data;
+    if (!note_id) return;
+    const index = this.notes.findIndex((note) => note.note_id === note_id);
     this.notes.splice(index, 1);
+    if (totalNotes) this.totalNotes = totalNotes;
+
+    if (this.totalNotes >= this.limit) {
+      this._notesApiService.getNotes(this._token!, this.limit).subscribe({
+        next: (data) => {
+          const { notes } = data;
+          this.notes = notes;
+        },
+        error: (err) => {
+          this._snackBarService.showMessage('¡No se encontraron notas!', 'Cerrar', 3000);
+        },
+      });
+    }
+  }
+
+  loadNotes(e: PageEvent): void {
+    const pageIndex = e.pageIndex;
+    this.limit = e.pageSize;
+
+    this._notesApiService.getNotes(this._token!, this.limit, pageIndex + 1).subscribe({
+      next: (data) => {
+        const { notes } = data;
+        this.notes = notes;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

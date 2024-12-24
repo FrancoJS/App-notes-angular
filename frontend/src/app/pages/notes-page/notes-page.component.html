@@ -4,6 +4,17 @@
     <h1>Hola, {{ username }}.</h1>
     <button (click)="openDialog()" mat-stroked-button>Agregar nota <mat-icon class="icon" fontIcon="add"></mat-icon></button>
   </header>
+  @if (notes.length > 0) {
+  <mat-paginator
+    class="paginator"
+    [length]="totalNotes"
+    [pageSize]="9"
+    [pageSizeOptions]="[3, 6, 9, 12]"
+    aria-label="Select page"
+    (page)="loadNotes($event)"
+  >
+  </mat-paginator>
+  }
   <div class="notes-list">
     @if(notes.length > 0) { @for(note of notes; track note.note_id){
     <app-note [note]="note" (delete)="handleNoteDeleted($event)"></app-note>

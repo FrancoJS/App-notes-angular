@@ -13,7 +13,7 @@ import {
 } from '../../shared/validators/password-custom-validators';
 
 import { IApiRegisterRequest } from '../../services/models/user-api.iterface';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthApiService } from '../../services/api/auth-api.service';
 
 @Component({
@@ -35,6 +35,7 @@ import { AuthApiService } from '../../services/api/auth-api.service';
 export class RegisterPageComponent {
   private readonly _formBuilder = inject(NonNullableFormBuilder);
   private _authApiService = inject(AuthApiService);
+  private _router = inject(Router);
 
   passwordStateMatcher = new PasswordStateMatcher();
   form = this._formBuilder.group(
@@ -58,6 +59,7 @@ export class RegisterPageComponent {
           const { username } = data.user;
           localStorage.setItem('username', username);
           localStorage.setItem('token', data.token);
+          this._router.navigateByUrl('api/notes');
         },
         error: (err) => {
           const { error } = err;

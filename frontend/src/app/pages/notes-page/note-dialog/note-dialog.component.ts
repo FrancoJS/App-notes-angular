@@ -46,12 +46,12 @@ export class NoteDialogComponent {
     if (!this.form.valid) return;
     this._notesApiService.createNote(this.form.value as IApiNoteRequest, this._token).subscribe({
       next: (data) => {
-        const { note } = data;
-        this._snackBarService.showMessage('¡Nota creada con exito!', 'Cerrar', 2000000);
-        this._dialogRef.close(note);
+        const { note, totalNotes } = data;
+        this._snackBarService.showMessage('¡Nota creada con exito!', 'Cerrar', 3000);
+        this._dialogRef.close({ note, totalNotes });
       },
       error: (err) => {
-        console.log(err);
+        this._snackBarService.showMessage('¡No se pudo crear la nota!', 'Cerrar', 3000);
       },
     });
   }
@@ -61,11 +61,11 @@ export class NoteDialogComponent {
     this._notesApiService.updateNote(this.form.value as IApiNoteRequest, this.note?.note_id, this._token).subscribe({
       next: (data) => {
         const { note } = data;
-        this._snackBarService.showMessage('¡Nota actualizad con exito!', 'Cerrar', 3000);
+        this._snackBarService.showMessage('¡Nota actualizada con exito!', 'Cerrar', 3000);
         this._dialogRef.close(note);
       },
       error: (err) => {
-        console.log(err);
+        this._snackBarService.showMessage('¡No se pudo actualizar la nota!', 'Cerrar', 3000);
       },
     });
   }

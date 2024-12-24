@@ -2,16 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IApiNoteRequest, IApiGetNotesResponse, IApiNoteResponse } from '../models/notes-api.interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotesApiService {
-  private readonly _notesUrl = 'http://localhost:3000/api/notes';
+  private readonly _notesUrl = environment.notesUrl;
   private _httpClient = inject(HttpClient);
 
-  getNotes(token: string): Observable<IApiGetNotesResponse> {
-    return this._httpClient.get<IApiGetNotesResponse>(this._notesUrl + '/all', {
+  getNotes(token: string, limit: number = 9, page: number = 1): Observable<IApiGetNotesResponse> {
+    return this._httpClient.get<IApiGetNotesResponse>(this._notesUrl + `/all?limit=${limit}&page=${page}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }

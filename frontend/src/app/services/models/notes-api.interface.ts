@@ -2,6 +2,7 @@ export interface IApiGetNotesResponse {
   ok: boolean;
   message: string;
   notes: IApiNote[];
+  totalNotes: number;
 }
 
 export interface IApiNote {
@@ -21,4 +22,5 @@ export interface IApiNoteResponse {
   ok: boolean;
   message: string;
   note: IApiNote;
+  totalNotes?: number;
 }
