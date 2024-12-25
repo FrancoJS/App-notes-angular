@@ -10,16 +10,13 @@ app.use(express.json({ limit: '10mb' }));
 app.use(cors());
 app.use(express.static(__dirname + '/dist/frontend/browser'));
 
-const backend_url = process.env.BACKEND_URL || 'https://app-notes-angular-production.up.railway.app';
+const backend_url = process.env.BACKEND_URL;
 
 app.use(
-  '/api',
+  '',
   httpProxyMiddleware.createProxyMiddleware({
     target: backend_url,
     changeOrigin: true,
-    pathRewrite: {
-      '^/api': '',
-    },
   }),
 );
 
