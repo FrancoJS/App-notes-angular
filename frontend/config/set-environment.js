@@ -1,9 +1,8 @@
+require('dotenv').config();
 const fs = require('fs');
 
-require('dotenv').config();
-
-const authUrl = process.env.AUTH_URL_PRODUCTION;
-const notesUrl = process.env.NOTES_URL_PRODUCTION;
+const authUrl = process.env.AUTH_URL;
+const notesUrl = process.env.NOTES_URL;
 
 const envDirectory = './src/environments';
 const envPath = `${envDirectory}/environment.ts`;
@@ -29,4 +28,4 @@ export const environment = {
 };`;
 
 fs.writeFileSync(envPath, envContent);
-fs.writeFileSync(envDevPath, envContent);
+fs.writeFileSync(envDevPath, envDevContent);
