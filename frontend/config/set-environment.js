@@ -4,10 +4,7 @@ const path = require('path');
 const authUrl = process.env.AUTH_URL;
 const notesUrl = process.env.NOTES_URL;
 
-const environmentPath = path.join(__dirname, '/src/app/environments/environment.ts');
-
-console.log(environmentPath);
-console.log(__dirname);
+const environmentPath = path.join(__dirname, '../src/environments/environment.ts');
 
 const environmentContent = `
 export const environment = {
