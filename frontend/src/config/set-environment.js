@@ -5,8 +5,8 @@ const authUrl = process.env.AUTH_URL;
 const notesUrl = process.env.NOTES_URL;
 
 const environmentDirPath = path.join(__dirname, '../environments');
-const environmentPathDevelopment = path.join(__dirname, '../environments/environment.development.ts');
 const environmentPath = path.join(__dirname, '../environments/environment.ts');
+const environmentPathDevelopment = path.join(__dirname, '../environments/environment.development.ts');
 
 if (!fs.existsSync(environmentDirPath)) {
   // Si no existe la carpeta, la creamos ya que railway elimina carpetas vacias
@@ -30,5 +30,5 @@ export const environment = {
   NOTES_URL: '${notesUrl}',
 };`;
 
-// fs.writeFileSync(environmentPath, environmentContent);
-// fs.writeFileSync(environmentPathDevelopment, environmentDevelopmentContent);
+fs.writeFileSync(environmentPath, environmentContent);
+fs.writeFileSync(environmentPathDevelopment, environmentDevelopmentContent);
