@@ -7,6 +7,11 @@ const notesUrl = process.env.NOTES_URL;
 const environmentPathDevelopment = path.join(__dirname, '../environments/environment.development.ts');
 const environmentPath = path.join(__dirname, '../environments/environment.ts');
 
+// if (!fs.existsSync(environmentPath)) {
+//   fs.mkdirSync(environmentPath, { recursive: true });
+//   fs.mkdirSync(environmentPathDevelopment, { recursive: true });
+// }
+
 const environmentContent = `
 export const environment = {
   production: true,
