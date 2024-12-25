@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { verRuta } = require('../environments/ruta');
 
 const authUrl = process.env.AUTH_URL;
 const notesUrl = process.env.NOTES_URL;
@@ -9,6 +10,7 @@ const environmentPath = path.join(__dirname, '../environments/environment.ts');
 console.log(environmentPath);
 console.log(path.resolve(environmentPath));
 console.log(process.cwd());
+verRuta();
 
 const environmentContent = `
 export const environment = {
@@ -16,4 +18,4 @@ export const environment = {
   NOTES_URL: '${notesUrl}',
 };`;
 
-// fs.writeFileSync(environmentPath, environmentContent);
+fs.writeFileSync(environmentPath, environmentContent);
