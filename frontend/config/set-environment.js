@@ -27,5 +27,6 @@ export const environment = {
   NOTES_URL: '${notesUrl}',
 };`;
 
+// Escribimos el archivo si no existe con el contenido que queremos que tenga
 fs.writeFileSync(envPath, envContent);
 fs.writeFileSync(envDevPath, envDevContent);
