@@ -7,10 +7,10 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json({ limit: '10mb' }));
 app.use(cors());
-app.use(express.static(__dirname + '/dist/browser'));
+app.use(express.static(__dirname + '/dist/frontend/browser'));
 
 app.get('/', (req, res) => {
-  res.sendFile('/dist/browser/index.html');
+  res.sendFile(__dirname + '/dist/frontend/browser/index.html');
 });
 
 app.listen(PORT, () => {
