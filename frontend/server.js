@@ -4,7 +4,7 @@ const app = express();
 const cors = require('cors');
 const httpProxyMiddleware = require('http-proxy-middleware');
 
-const backend_url = process.env.BACKEND_URL;
+const backend_url = process.env.BACKEND_URL || 'https://app-notes-angular-production.up.railway.app';
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json({ limit: '10mb' }));
