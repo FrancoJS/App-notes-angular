@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { verRuta } = require('../environments/ruta');
 
 const authUrl = process.env.AUTH_URL;
 const notesUrl = process.env.NOTES_URL;
