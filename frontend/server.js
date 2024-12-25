@@ -1,7 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-require('dotenv').config();
 const httpProxyMiddleware = require('http-proxy-middleware');
 
 const PORT = process.env.PORT || 3000;
@@ -19,6 +19,7 @@ app.use(
     changeOrigin: true,
   }),
 );
+console.log(backend_url);
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/dist/frontend/browser/index.html');
