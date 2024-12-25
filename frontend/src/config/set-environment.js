@@ -10,6 +10,7 @@ const environmentPath = path.join(__dirname, '../environments/environment.ts');
 console.log(environmentPath);
 console.log(path.resolve(environmentPath));
 console.log(process.cwd());
+console.log(__dirname);
 verRuta();
 
 const environmentContent = `
