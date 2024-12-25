@@ -25,3 +25,5 @@ export interface IApiRegisterRequest {
   email: string;
   password: string;
 }
+
+// // Son los modelos de datos que ocupa todo los relacionado con peticiones Http de las notas

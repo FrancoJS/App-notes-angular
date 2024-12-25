@@ -24,6 +24,8 @@ export class NoteComponent {
   private _dialog = inject(MatDialog);
   private _token = localStorage.getItem('token')!;
   private _snackBarService = inject(SnackbarService);
+  // Se ocupa el decorador @Output para comunicar a un componente hijo con el padre
+  // Esto es One way data binding
   @Output() delete = new EventEmitter<{ note_id: number; totalNotes: number | undefined }>();
 
   editNote(): void {

@@ -19,6 +19,7 @@ import { SnackbarService } from '../../services/snackbar.service';
 })
 export class NotesPageComponent implements OnInit {
   private _notesApiService = inject(NotesApiService);
+  // Para ocupar un Dialog de Angular Material se debe inyectar la clase MatDialog
   private _dialog = inject(MatDialog);
   private _token = localStorage.getItem('token');
   private _snackBarService = inject(SnackbarService);
@@ -43,13 +44,15 @@ export class NotesPageComponent implements OnInit {
   }
   openDialog() {
     if (this._token) {
+      //Se guarda una referencia al dialog para poder suscribirse cuando se cierre
+      //Se ocupa la instancia de MatDialog para abrir el dialog con el componente especificado
       const diaglogRef = this._dialog.open(NoteDialogComponent, {
         data: {
           mode: 'create',
           title: 'Crear nota',
         },
       });
-
+      // Nos suscribimos para obtener los datos que nos manda al cerrar el Dialog
       diaglogRef.afterClosed().subscribe((result: { note: IApiNote; totalNotes: number }) => {
         if (!result) return;
         if (!result.note) return;
@@ -71,6 +74,7 @@ export class NotesPageComponent implements OnInit {
     this.notes.splice(index, 1);
     if (totalNotes) this.totalNotes = totalNotes;
 
+    // Si el total de notas es mayor al limite se deben cargar denuevo las notas ya que quedaria un espacio en blanco
     if (this.totalNotes >= this.limit) {
       this._notesApiService.getNotes(this._token!, this.limit).subscribe({
         next: (data) => {

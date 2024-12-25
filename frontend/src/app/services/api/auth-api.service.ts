@@ -8,14 +8,16 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class AuthApiService {
+  // Obtenemos la url de autenticacion desde el archivo de environment
   private readonly _authUrl = environment.authUrl;
-
   private _httpClient = inject(HttpClient);
 
+  // Peticion Http Para loguear al usuario
   loginUser(user: IApiLoginRequest): Observable<IApiUserResponse> {
     return this._httpClient.post<IApiUserResponse>(this._authUrl + '/login', user);
   }
 
+  // Peticion para registrar a un usuario
   registerUser(user: IApiRegisterRequest): Observable<IApiUserResponse> {
     return this._httpClient.post<IApiUserResponse>(this._authUrl + '/register', user);
   }

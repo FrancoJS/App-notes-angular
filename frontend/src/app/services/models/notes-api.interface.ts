@@ -24,3 +24,5 @@ export interface IApiNoteResponse {
   note: IApiNote;
   totalNotes?: number;
 }
+
+// Son los modelos de datos que ocupa todo los relacionado con peticiones Http de las notas

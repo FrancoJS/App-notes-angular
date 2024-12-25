@@ -29,7 +29,9 @@ import { MatCardModule } from '@angular/material/card';
 export class NoteDialogComponent {
   private readonly _formBuilder = inject(FormBuilder);
   private _notesApiService = inject(NotesApiService);
+  // Se debe guardar una referencia al Dialog ya que debe vincularse de alguna manera
   private _dialogRef = inject(MatDialogRef<NoteDialogComponent>);
+  // injection Token de Angular materual que nos sirve para obtener los datos que nos manda el que abre el dialog
   private _data = inject(MAT_DIALOG_DATA);
   private _token = localStorage.getItem('token')!;
   dialogMode = this._data.mode;
@@ -58,6 +60,7 @@ export class NoteDialogComponent {
 
   updateNote() {
     if (!this.form.valid) return;
+    // Se tiene que convertir el tipo de form value para que el compilador trate al valor como si fuera de tipo IApiNoteRequest
     this._notesApiService.updateNote(this.form.value as IApiNoteRequest, this.note?.note_id, this._token).subscribe({
       next: (data) => {
         const { note } = data;
