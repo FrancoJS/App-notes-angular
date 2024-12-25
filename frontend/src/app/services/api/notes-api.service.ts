@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class NotesApiService {
-  private readonly _notesUrl = environment.notesUrl;
+  private readonly _notesUrl = environment.NOTES_URL;
   private _httpClient = inject(HttpClient);
 
   getNotes(token: string, limit: number = 9, page: number = 1): Observable<IApiGetNotesResponse> {

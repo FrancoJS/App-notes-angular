@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthApiService {
   // Obtenemos la url de autenticacion desde el archivo de environment
-  private readonly _authUrl = environment.authUrl;
+  private readonly _authUrl = environment.AUTH_URL;
   private _httpClient = inject(HttpClient);
 
   // Peticion Http Para loguear al usuario
