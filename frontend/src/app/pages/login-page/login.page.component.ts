@@ -47,8 +47,8 @@ export class LoginPageComponent {
 
   form = this._formBuilder.nonNullable.group({
     // nonNullable es un atributo que hace que los controles sean obligatorios
-    email: ['franco123@gmail.com', [Validators.required, Validators.email]],
-    password: ['AbcD1234*', [Validators.required, passwordCustomValidator]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, passwordCustomValidator]],
   });
 
   clickLogin(): void {
