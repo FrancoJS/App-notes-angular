@@ -4,7 +4,6 @@ require('dotenv').config();
 
 const authUrl = process.env.AUTH_URL_PRODUCTION;
 const notesUrl = process.env.NOTES_URL_PRODUCTION;
-const domain = process.env.BACKEND_URL;
 
 const envDirectory = './src/environments';
 const envPath = `${envDirectory}/environment.ts`;
@@ -18,7 +17,6 @@ if (!fs.existsSync(envDirectory)) {
 const envContent = `
 export const environment = {
   production: true,
-  BACKEND_URL: '${domain}',
   AUTH_URL: '${authUrl}',
   NOTES_URL: '${notesUrl}',
 };`;
@@ -26,7 +24,6 @@ export const environment = {
 const envDevContent = `
 export const environment = {
   production: false,
-  BACKEND_URL: '${domain}',
   AUTH_URL: '${authUrl}',
   NOTES_URL: '${notesUrl}',
 };`;
