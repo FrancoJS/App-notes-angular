@@ -18,7 +18,7 @@ if (!fs.existsSync(envDirectory)) {
 const envContent = `
 export const environment = {
   production: true,
-  DOMAIN: '${domain}',
+  BACKEND_URL: '${domain}',
   AUTH_URL: '${authUrl}',
   NOTES_URL: '${notesUrl}',
 };`;
@@ -26,7 +26,7 @@ export const environment = {
 const envDevContent = `
 export const environment = {
   production: false,
-  DOMAIN: '${domain}',
+  BACKEND_URL: '${domain}',
   AUTH_URL: '${authUrl}',
   NOTES_URL: '${notesUrl}',
 };`;
