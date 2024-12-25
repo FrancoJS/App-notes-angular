@@ -10,12 +10,9 @@ app.use(cors());
 app.use(express.static(__dirname + '/dist/browser'));
 
 app.get('/', (req, res) => {
-  console.log(__dirname);
-  console.log(path.join(__dirname, '/dist/browser/index.html'));
-  res.sendFile(__dirname + '/dist/browser/index.html');
+  res.sendFile('/dist/browser/index.html');
 });
 
 app.listen(PORT, () => {
-  console.log(__dirname);
   console.log(`Server running on port ${PORT}`);
 });
