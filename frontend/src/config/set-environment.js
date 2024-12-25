@@ -7,7 +7,8 @@ const notesUrl = process.env.NOTES_URL;
 const environmentPath = path.join(__dirname, '../environments/environment.ts');
 
 console.log(environmentPath);
-console.log(__dirname);
+console.log(path.resolve(environmentPath));
+console.log(process.cwd());
 
 const environmentContent = `
 export const environment = {
@@ -15,4 +16,4 @@ export const environment = {
   NOTES_URL: '${notesUrl}',
 };`;
 
-fs.writeFileSync(environmentPath, environmentContent);
+// fs.writeFileSync(environmentPath, environmentContent);
