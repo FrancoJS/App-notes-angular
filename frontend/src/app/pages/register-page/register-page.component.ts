@@ -64,7 +64,7 @@ export class RegisterPageComponent {
           const { username } = data.user;
           localStorage.setItem('username', username);
           localStorage.setItem('token', data.token);
-          this._router.navigateByUrl('api/notes');
+          this._router.navigateByUrl('/notes');
         },
         error: (err) => {
           console.log(err);

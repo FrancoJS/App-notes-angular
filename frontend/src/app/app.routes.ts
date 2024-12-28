@@ -23,7 +23,7 @@ export const routes: Routes = [
   },
   {
     // Ruta de notas.
-    path: 'api/notes',
+    path: 'notes',
     component: NotesPageComponent,
     canActivate: [authGuard],
   },

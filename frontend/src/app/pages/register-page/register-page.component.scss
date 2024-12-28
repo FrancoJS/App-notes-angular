@@ -4,6 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 10px;
 
   .card-title {
     text-align: center;
@@ -11,7 +13,7 @@
   }
 
   .card {
-    width: 500px;
+    width: 450px;
 
     &-title {
       justify-content: center;
@@ -20,7 +22,6 @@
     .card-content {
       display: flex;
       flex-direction: column;
-      padding-top: 1em;
     }
 
     .form {
@@ -46,6 +47,14 @@
       &:hover {
         opacity: 0.8;
       }
+    }
+  }
+  a {
+    text-decoration: none;
+    color: #fff;
+    &:hover {
+      opacity: 0.8;
+      text-decoration: underline;
     }
   }
 }

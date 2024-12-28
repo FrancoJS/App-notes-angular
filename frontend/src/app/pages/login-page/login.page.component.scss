@@ -4,6 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 10px;
 
   .card-title {
     text-align: center;
@@ -11,7 +13,7 @@
   }
 
   .card {
-    width: 500px;
+    width: 450px;
 
     &-title {
       justify-content: center;
@@ -20,7 +22,7 @@
     .card-content {
       display: flex;
       flex-direction: column;
-      padding-top: 1em;
+      justify-content: center;
     }
 
     .form {
@@ -62,7 +64,32 @@
 
       &:hover {
         opacity: 0.8;
+        text-decoration: underline;
       }
+    }
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    max-width: 100%;
+    .card {
+      background-color: rgb(15 23 42);
+      box-shadow: none;
+    }
+
+    .form {
+      padding: 2rem;
     }
   }
 }

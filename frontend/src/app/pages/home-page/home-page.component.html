@@ -11,9 +11,16 @@
         iniciar sesion para poder ocupar la aplicacion.
       </p>
     </mat-card-content>
-    <mat-card-actions class="card-actions">
+    <mat-card-actions class="card-actions" [ngStyle]="{ 'flex-direction': isAuthenticated() ? 'column' : 'row' }">
+      @if (isAuthenticated()) {
+      <p>¡Ya estas autenticado!</p>
+      <button [routerLink]="['/notes']" mat-stroked-button>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_forward"></mat-icon> NOTAS
+      </button>
+      } @else {
       <button [routerLink]="['/auth/login']" mat-stroked-button>INICIAR SESION</button>
       <button [routerLink]="['/auth/register']" mat-stroked-button>REGISTRARSE</button>
+      }
     </mat-card-actions>
   </mat-card>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { IApiNote } from '../../../services/models/notes-api.interface';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,7 +25,7 @@ export class NoteComponent {
   private _token = localStorage.getItem('token')!;
   private _snackBarService = inject(SnackbarService);
   // Se ocupa el decorador @Output para comunicar a un componente hijo con el padre
-  // Esto es One way data binding
+  // Esto es One way data binding a traves de un EventEmitter
   @Output() delete = new EventEmitter<{ note_id: number; totalNotes: number | undefined }>();
 
   editNote(): void {

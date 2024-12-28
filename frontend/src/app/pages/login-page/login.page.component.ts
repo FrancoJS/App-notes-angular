@@ -63,7 +63,7 @@ export class LoginPageComponent {
           localStorage.setItem('username', username);
           localStorage.setItem('token', response.token);
           // Navegamos a la pagina de notas
-          this._router.navigateByUrl('api/notes');
+          this._router.navigateByUrl('/notes');
         },
         error: (err) => {
           this._snackBarService.showMessage('¡Usuario o contraseña incorrectos!', 'Cerrar', 3000);
