@@ -9,7 +9,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(cors());
 app.use(express.static(__dirname + '/dist/frontend/browser'));
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(__dirname + '/dist/frontend/browser/index.html');
 });
 
