@@ -21,7 +21,7 @@
         }
       </mat-form-field>
     </form>
-    <mat-dialog-actions align="end">
+    <mat-dialog-actions align="end" class="dialog-actions">
       <button mat-stroked-button [mat-dialog-close]="false">Cancelar</button>
       @if(dialogMode == 'create') {
       <button mat-stroked-button (click)="saveNote()">Guardar</button>

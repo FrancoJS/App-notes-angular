@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { NoteDialogComponent } from './note-dialog/note-dialog.component';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
@@ -23,6 +23,8 @@ export class NotesPageComponent implements OnInit {
   private _dialog = inject(MatDialog);
   private _token = localStorage.getItem('token');
   private _snackBarService = inject(SnackbarService);
+  private _paginatorIntl = inject(MatPaginatorIntl);
+
   username = localStorage.getItem('username');
   notes: IApiNote[] = [];
   totalNotes!: number;
@@ -35,6 +37,9 @@ export class NotesPageComponent implements OnInit {
         next: (data) => {
           this.totalNotes = data.totalNotes;
           this.notes = data.notes;
+          this._paginatorIntl.itemsPerPageLabel = 'Notas por pagina';
+          this._paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) =>
+            `Pagina ${page + 1} de ${length}`;
         },
         error: (err) => {
           this._snackBarService.showMessage('¡No se encontraron notas!', 'Cerrar', 3000);

@@ -4,8 +4,8 @@
   background-color: rgb(30 41 59);
   display: flex;
   justify-content: center;
-  .navbar {
-    width: 63%;
+  .navbar-links {
+    width: 60%;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -28,6 +28,60 @@
         color: #ddd;
         cursor: pointer;
         padding: 8px;
+      }
+    }
+  }
+}
+
+.container-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .desktop {
+    display: none;
+  }
+
+  .container-mobile {
+    display: block;
+    .sidenav-container {
+      border-radius: none;
+      z-index: 10;
+      .sidenav {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 20;
+        bottom: 0;
+        right: 0;
+        background-color: rgb(15 23 42);
+        // opacity: 0.9;
+
+        &-list a {
+          padding: 30px 20px;
+          p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .header {
+      position: fixed;
+      z-index: 9;
+      justify-content: flex-end;
+      align-items: center;
+
+      .sidenav-toggle {
+        color: #ddd;
+
+        padding: 20px;
+
+        &:active {
+          opacity: 0.5;
+        }
       }
     }
   }

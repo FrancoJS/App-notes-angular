@@ -31,3 +31,13 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .container {
+    .card {
+      width: 100%;
+      background-color: rgb(15 23 42);
+      box-shadow: none;
+    }
+  }
+}

@@ -46,6 +46,7 @@
 
       &:hover {
         opacity: 0.8;
+        text-decoration: underline;
       }
     }
   }
@@ -55,6 +56,30 @@
     &:hover {
       opacity: 0.8;
       text-decoration: underline;
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .container {
+    padding: 10px 0 60px 0;
+
+    .form {
+      padding: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    .card {
+      width: 100%;
+      background-color: rgb(15 23 42);
+      box-shadow: none;
+    }
+
+    .form {
+      padding: 2rem;
     }
   }
 }

@@ -28,3 +28,12 @@
     padding-top: 20px;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .container {
+    margin-top: 60px;
+    .header {
+      flex-direction: column;
+    }
+  }
+}

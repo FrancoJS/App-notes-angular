@@ -1,5 +1,5 @@
-<header class="header">
-  <nav class="navbar">
+<header class="header desktop">
+  <nav class="navbar-links">
     <a [routerLink]="['/']">Pagina principal</a>
     <ul>
       <a (click)="cerrarSesion()"
@@ -8,3 +8,21 @@
     </ul>
   </nav>
 </header>
+<div class="container-mobile">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" class="sidenav">
+      <mat-nav-list class="sidenav-list">
+        <a mat-list-item (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></a>
+        <a mat-list-item [routerLink]="['/']">
+          <p><mat-icon>home</mat-icon>Pagina principal</p></a
+        >
+        <a mat-list-item (click)="cerrarSesion()" [routerLink]="['/auth/login']"
+          ><p><mat-icon>logout</mat-icon>Salir</p></a
+        >
+      </mat-nav-list>
+    </mat-sidenav>
+  </mat-sidenav-container>
+  <header class="header">
+    <mat-icon class="sidenav-toggle" (click)="sidenav.toggle()">menu</mat-icon>
+  </header>
+</div>

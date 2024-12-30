@@ -34,5 +34,21 @@
         max-height: 150px;
       }
     }
+    &-actions {
+      justify-content: center;
+      gap: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    .dialog {
+      .form {
+        &-field {
+          width: 300px;
+        }
+      }
+    }
   }
 }
