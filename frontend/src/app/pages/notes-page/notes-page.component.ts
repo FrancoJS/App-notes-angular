@@ -39,7 +39,7 @@ export class NotesPageComponent implements OnInit {
           this.notes = data.notes;
           this._paginatorIntl.itemsPerPageLabel = 'Notas por pagina';
           this._paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) =>
-            `Pagina ${page + 1} de ${length}`;
+            `Pagina ${page + 1} de ${Math.ceil(length / pageSize)}`;
         },
         error: (err) => {
           this._snackBarService.showMessage('¡No se encontraron notas!', 'Cerrar', 3000);

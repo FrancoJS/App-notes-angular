@@ -13,12 +13,9 @@
     <mat-sidenav #sidenav mode="side" class="sidenav">
       <mat-nav-list class="sidenav-list">
         <a mat-list-item (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></a>
-        <a mat-list-item [routerLink]="['/']">
-          <p><mat-icon>home</mat-icon>Pagina principal</p></a
-        >
-        <a mat-list-item (click)="cerrarSesion()" [routerLink]="['/auth/login']"
-          ><p><mat-icon>logout</mat-icon>Salir</p></a
-        >
+
+        <a mat-list-item [routerLink]="['/']"> Pagina principal</a>
+        <a mat-list-item (click)="cerrarSesion()" [routerLink]="['/auth/login']">Salir</a>
       </mat-nav-list>
     </mat-sidenav>
   </mat-sidenav-container>
