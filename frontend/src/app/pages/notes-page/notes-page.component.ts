@@ -2,18 +2,18 @@ import { Component, inject, OnInit } from '@angular/core';
 import { NotesApiService } from '../../services/api/notes-api.service';
 import { NoteComponent } from './note/note.component';
 import { IApiNote } from '../../services/models/notes-api.interface';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { NoteDialogComponent } from './note-dialog/note-dialog.component';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
-import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-notes-page',
   standalone: true,
-  imports: [NoteComponent, MatButtonModule, MatIconModule, NavbarComponent, MatPaginatorModule],
+  imports: [NoteComponent, MatButton, MatIcon, NavbarComponent, MatPaginator],
   templateUrl: './notes-page.component.html',
   styleUrl: './notes-page.component.scss',
 })

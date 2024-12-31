@@ -4,6 +4,7 @@ import { LoginPageComponent } from './pages/login-page/login.page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NotesPageComponent } from './pages/notes-page/notes-page.component';
 import { authGuard } from './guards/auth.guard';
+import { Component } from '@angular/core';
 
 export const routes: Routes = [
   {
@@ -24,7 +25,8 @@ export const routes: Routes = [
   {
     // Ruta de notas.
     path: 'notes',
-    component: NotesPageComponent,
+    loadComponent: () => import('./pages/notes-page/notes-page.component').then((c) => c.NotesPageComponent),
+    // Lazy loading, permite cargar los componentes de manera asincrona, mejora el rendimiento
     canActivate: [authGuard],
   },
 ];

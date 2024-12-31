@@ -1,7 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { IApiNote } from '../../../services/models/notes-api.interface';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
+import { MatCardHeader, MatCard, MatCardTitle, MatCardContent } from '@angular/material/card';
+import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NotesApiService } from '../../../services/api/notes-api.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,7 +14,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
 @Component({
   selector: 'app-note',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule],
+  imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatIcon, MatButtonModule, MatMenuModule],
   templateUrl: './note.component.html',
   styleUrl: './note.component.scss',
 })

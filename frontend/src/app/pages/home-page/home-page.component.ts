@@ -1,15 +1,15 @@
-import { MatButtonModule } from '@angular/material/button';
-import { Component, inject } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
+import { Component } from '@angular/core';
+import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIcon } from '@angular/material/icon';
 import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, RouterLink, MatIconModule, NgStyle],
+  imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions, MatButton, RouterLink, MatIcon, NgStyle],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })

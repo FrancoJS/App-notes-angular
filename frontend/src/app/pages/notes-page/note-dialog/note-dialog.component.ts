@@ -1,27 +1,18 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButton } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 import { NotesApiService } from '../../../services/api/notes-api.service';
 import { IApiNoteRequest } from '../../../services/models/notes-api.interface';
 import { SnackbarService } from '../../../services/snackbar.service';
-import { MatCardModule } from '@angular/material/card';
+import { MatCard } from '@angular/material/card';
 
 @Component({
   selector: 'app-note-dialog',
   standalone: true,
-  imports: [
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-  ],
+  imports: [MatDialogModule, ReactiveFormsModule, MatFormField, MatError, MatLabel, MatInput, MatButton, MatCard],
   templateUrl: './note-dialog.component.html',
   styleUrl: './note-dialog.component.scss',
   // changeDetection: ChangeDetectionStrategy.OnPush,
